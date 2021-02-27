@@ -28,5 +28,11 @@ describe("Our first suite", () => {
     //by two different attributes
     cy.get('[placeholder="Email"][fullwidth]');
     // or cy.get('[placeholder="Email"][type="email"]')
+
+    //by tag name, Attribute with value,ID and Class name
+    cy.get('input[placeholder="Email"]#inputEmail1.input-full-width');
+
+    //The most recommend way by Cypress
+    cy.get('[data-cy="imputEmail1"]');
   });
 });
