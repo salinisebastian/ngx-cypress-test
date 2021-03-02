@@ -14,7 +14,7 @@ describe("Our first suite", () => {
 
     cy.contains("nb-card", "Horizontal form").find('[type="email"]');
   });
-  it.only("then and wrap", () => {
+  it("then and wrap", () => {
     cy.visit("/");
     cy.contains("Forms").click();
     cy.contains("Form Layouts").click();
@@ -47,5 +47,36 @@ describe("Our first suite", () => {
           .should("contain", "Password");
       });
     });
+  });
+
+  it("s", () => {
+    cy.visit("/");
+    cy.contains("Forms").click();
+    cy.contains("Form Layouts").click();
+    //#1
+    cy.get('[for="inputEmail1"]').then((value) => {
+      expect(value.text()).to.equal("Email");
+    });
+    //#2
+    cy.get('[for="inputEmail1"]')
+      .invoke("text")
+      .then((value) => {
+        expect(value).to.equal("Email");
+      });
+  });
+  it.only("p", () => {
+    cy.visit("/");
+    cy.contains("Forms").click();
+    cy.contains("Form Layouts").click();
+
+    cy.contains("nb-card", "Basic form")
+      .find("nb-checkbox")
+      .click()
+      .find(".custom-checkbox")
+      .invoke("attr", "class")
+      // .should("contain", "checked");
+      .then((value) => {
+        expect(value).to.contains("checked");
+      });
   });
 });
