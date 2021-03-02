@@ -30,6 +30,7 @@ describe("Our first suite", () => {
     cy.contains("nb-card", "Basic form")
       .find('[for="exampleInputPassword1"]')
       .should("contain", "Password");
+    //In order to avoid repeatation we can write it in another way
 
     cy.contains("nb-card", "Using the Grid").then((firstform) => {
       const textEmail = firstform.find('[for="inputEmail1"]').text();
