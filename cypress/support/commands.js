@@ -22,4 +22,10 @@
 //
 //
 // -- This will overwrite an existing command --
+
+import { createPartiallyEmittedExpression } from "typescript";
+
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add("openHomePage", () => {
+  cy.visit("/");
+});
