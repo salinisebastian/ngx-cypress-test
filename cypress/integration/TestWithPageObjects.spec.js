@@ -1,17 +1,29 @@
-const { createYield } = require("typescript");
+const { createYield, createPartiallyEmittedExpression } = require("typescript");
 import { onFormLayoutPage } from "../support/PageOjects/InlineformPage";
 import { navigateTo } from "../support/PageOjects/navigationPage";
 import { GoTo } from "../support/PageOjects/DatePicker";
 import { onTableAndDataPage } from "../support/PageOjects/tablesAndDataPage";
-
+const runOn = (browser, fn) => {
+  if (Cypress.isBrowser(browser)) {
+    fn();
+  }
+};
+const ignoreOn = (browser, fn) => {
+  if (Cypress.isBrowser(browser)) {
+    fn();
+  }
+};
 describe("Test with Page Objects", () => {
   beforeEach("open Application", () => {
     cy.openHomePage();
   });
+  // ignoreOn("chrome", () => {
   it("Verify navigations across the pages", () => {
     navigateTo.formLayoutPage();
     navigateTo.formDatePickerPage();
   });
+  // });
+
   it("Submit form", () => {
     navigateTo.formLayoutPage();
     onFormLayoutPage.submitInlineformwithNameAndEmail(
@@ -27,7 +39,7 @@ describe("Test with Page Objects", () => {
     GoTo.DatepickerWithRange(1, 2);
   });
 
-  it.only("Tables&Datas", () => {
+  it("Tables&Datas", () => {
     navigateTo.tablesAndDataPage();
     onTableAndDataPage.UpdateAgeByFirstName("Jack", "18");
     onTableAndDataPage.addNewRecordWithFirstAndLastName("Amal", "Joy");
